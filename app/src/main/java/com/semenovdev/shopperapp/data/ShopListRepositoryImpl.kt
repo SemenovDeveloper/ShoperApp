@@ -6,13 +6,13 @@ import com.semenovdev.shopper.domain.ShopItem
 import com.semenovdev.shopper.domain.ShopListRepository
 
 object ShopListRepositoryImpl: ShopListRepository {
-    private val shopList = mutableListOf<ShopItem>()
+    private val shopList = sortedSetOf<ShopItem>({o1, o2 -> o1.id.compareTo(o2.id)})
     private val shopListLD = MutableLiveData<List<ShopItem>>()
 
     private var autoIncrementId = ShopItem.UNDEFINED_ID
 
     init {
-        for (i in 0..10) {
+        for (i in 0..10000) {
             var item: ShopItem = ShopItem(name = "Name ${i.toString()}", enabled = true, count = i)
             createShopItem(item)
         }
