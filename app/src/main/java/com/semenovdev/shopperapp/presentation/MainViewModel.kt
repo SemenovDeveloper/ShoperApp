@@ -29,7 +29,7 @@ class MainViewModel: ViewModel() {
         return getShopItemUseCase.getShopItemById(shopItemId)
     }
 
-    fun updateShopItemEnabled(shopItem: ShopItem, enabled: Boolean) {
+    fun updateShopItemEnabled(shopItem: ShopItem) {
         var newShopItem = shopItem.copy(enabled = !shopItem.enabled)
 
         updateShopItemUseCase.updateShopItem(newShopItem)
