@@ -4,13 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.semenovdev.shopper.domain.ShopItem
 import com.semenovdev.shopperapp.R
-import java.lang.RuntimeException
-
-var shopItemSatus = listOf("")
 
 class ShopListAdapter: RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>() {
     var list = listOf<ShopItem>()
