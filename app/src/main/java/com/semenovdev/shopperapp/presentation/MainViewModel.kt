@@ -1,6 +1,5 @@
-package com.semenovdev.shopper.presentation
+package com.semenovdev.shopperapp.presentation
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.semenovdev.shopper.data.ShopListRepositoryImpl
 import com.semenovdev.shopper.domain.DeleteShopItemUseCase

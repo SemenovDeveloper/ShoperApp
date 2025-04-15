@@ -1,4 +1,4 @@
-package com.semenovdev.shopper.presentation
+package com.semenovdev.shopperapp.presentation
 
 import android.os.Bundle
 import android.util.Log
@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.semenovdev.shopperapp.R
-import com.semenovdev.shopperapp.presentation.ShopListAdapter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
@@ -38,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                 viewModel.updateShopItemEnabled(it)
             }
             shopListAdapter.onShopItemClickListener = {
-                Log.d("testing", it.toString())
+                Log.d("Main Activity", it.toString())
             }
         }
 
