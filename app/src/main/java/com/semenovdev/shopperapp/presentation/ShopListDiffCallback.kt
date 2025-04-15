@@ -1,7 +1,7 @@
 package com.semenovdev.shopperapp.presentation
 
 import androidx.recyclerview.widget.DiffUtil
-import com.semenovdev.shopper.domain.ShopItem
+import com.semenovdev.shopperapp.domain.ShopItem
 
 class ShopListDiffCallback(
     private val oldList: List<ShopItem>,

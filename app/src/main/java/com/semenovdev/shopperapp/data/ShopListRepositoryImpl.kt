@@ -1,9 +1,9 @@
-package com.semenovdev.shopper.data
+package com.semenovdev.shopperapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.semenovdev.shopper.domain.ShopItem
-import com.semenovdev.shopper.domain.ShopListRepository
+import com.semenovdev.shopperapp.domain.ShopItem
+import com.semenovdev.shopperapp.domain.ShopListRepository
 import kotlin.random.Random
 
 object ShopListRepositoryImpl: ShopListRepository {

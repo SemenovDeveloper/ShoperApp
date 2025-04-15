@@ -1,4 +1,4 @@
-package com.semenovdev.shopper.domain
+package com.semenovdev.shopperapp.domain
 
 import androidx.lifecycle.LiveData
 

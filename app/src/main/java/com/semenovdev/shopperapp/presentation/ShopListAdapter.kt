@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.semenovdev.shopper.domain.ShopItem
+import com.semenovdev.shopperapp.domain.ShopItem
 import com.semenovdev.shopperapp.R
 
 class ShopListAdapter: ListAdapter<ShopItem, ShopListAdapter.ShopItemViewHolder>(

@@ -1,12 +1,12 @@
 package com.semenovdev.shopperapp.presentation
 
 import androidx.lifecycle.ViewModel
-import com.semenovdev.shopper.data.ShopListRepositoryImpl
-import com.semenovdev.shopper.domain.DeleteShopItemUseCase
-import com.semenovdev.shopper.domain.GetShopItemUseCase
-import com.semenovdev.shopper.domain.GetShopListUseCase
-import com.semenovdev.shopper.domain.ShopItem
-import com.semenovdev.shopper.domain.UpdateShopItemUseCase
+import com.semenovdev.shopperapp.data.ShopListRepositoryImpl
+import com.semenovdev.shopperapp.domain.DeleteShopItemUseCase
+import com.semenovdev.shopperapp.domain.GetShopItemUseCase
+import com.semenovdev.shopperapp.domain.GetShopListUseCase
+import com.semenovdev.shopperapp.domain.ShopItem
+import com.semenovdev.shopperapp.domain.UpdateShopItemUseCase
 
 class MainViewModel: ViewModel() {
 
