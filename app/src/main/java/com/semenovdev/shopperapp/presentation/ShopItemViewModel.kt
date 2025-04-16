@@ -40,13 +40,13 @@ class ShopItemViewModel: ViewModel() {
     private val updateShopItemUseCase = UpdateShopItemUseCase(repository)
     private val createShopItemUseCase = CreateShopItemUseCase(repository)
 
-    fun updateShopItemData(shopItem: ShopItem, inputName: String?, inputCount: String?) {
+    fun updateShopItemData(inputName: String?, inputCount: String?) {
         val name = parseName(inputName)
         val count = parseCount(inputCount)
         val isInputsValid = validateInput(name, count)
         if (isInputsValid) {
             _shopItem.value?.let {
-                var newShopItem = shopItem.copy(name, count)
+                var newShopItem = it.copy(name, count)
                 updateShopItemUseCase.updateShopItem(newShopItem)
                 finishAction()
             }
@@ -95,11 +95,11 @@ class ShopItemViewModel: ViewModel() {
         return result
     }
 
-    private fun resetErrorInputName () {
+    fun resetErrorInputName () {
         _errorInputName.value = false
     }
 
-    private fun resetErrorInputCount () {
+    fun resetErrorInputCount () {
         _errorInputCount.value = false
     }
 

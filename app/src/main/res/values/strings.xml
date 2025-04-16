@@ -5,4 +5,6 @@
     <string name="button_submit">Save</string>
     <string name="button_add_shop_item">Add new shop item</string>
     <string name="shop_items_list">Shop items list</string>
+    <string name="error_shop_item_name">Incorrect name</string>
+    <string name="error_shop_item_count">Incorrect count</string>
 </resources>

@@ -13,7 +13,7 @@ object ShopListRepositoryImpl: ShopListRepository {
     private var autoIncrementId = ShopItem.UNDEFINED_ID
 
     init {
-        for (i in 0..1000) {
+        for (i in 0..2) {
             var item: ShopItem = ShopItem(name = "Name ${i.toString()}", enabled = Random.nextBoolean(), count = i)
             createShopItem(item)
         }
