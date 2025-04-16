@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ShopperApp</string>
+    <string name="et_count">Count:</string>
+    <string name="et_name">Name:</string>
+    <string name="button_submit">Save</string>
+    <string name="button_add_shop_item">Add new shop item</string>
+    <string name="shop_items_list">Shop items list</string>
 </resources>

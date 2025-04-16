@@ -1,13 +1,13 @@
-package com.semenovdev.shopper.presentation
+package com.semenovdev.shopperapp.presentation
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.semenovdev.shopperapp.R
-import com.semenovdev.shopperapp.presentation.ShopListAdapter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
@@ -21,7 +21,13 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         viewModel.shopList.observe(this) {
-            shopListAdapter.list = it
+            shopListAdapter.submitList(it)
+        }
+
+        val buttonAddItem = findViewById<FloatingActionButton>(R.id.button_add_shop_item)
+        buttonAddItem.setOnClickListener {
+            val intent = ShopItemActivity.newIntentAddItem(this)
+            startActivity(intent)
         }
     }
 
@@ -37,9 +43,8 @@ class MainActivity : AppCompatActivity() {
             shopListAdapter.onShopItemLongClickListener = {
                 viewModel.updateShopItemEnabled(it)
             }
-            shopListAdapter.onShopItemClickListener = {
-                Log.d("testing", it.toString())
-            }
+
+            setupOnClickListener()
         }
 
         val callback = object: ItemTouchHelper.SimpleCallback(
@@ -58,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                 viewHolder: RecyclerView.ViewHolder,
                 direction: Int
             ) {
-                val item = shopListAdapter.list[viewHolder.adapterPosition]
+                val item = shopListAdapter.currentList[viewHolder.adapterPosition]
                 viewModel.deleteShopItem(item)
             }
         }
@@ -66,5 +71,13 @@ class MainActivity : AppCompatActivity() {
         val itemTouchHelper = ItemTouchHelper(callback)
 
         itemTouchHelper.attachToRecyclerView(rvShopList)
+
+    }
+
+    private fun setupOnClickListener () {
+        shopListAdapter.onShopItemClickListener = {
+            val intent = ShopItemActivity.newIntentEditItem(this, it.id)
+            startActivity(intent)
+        }
     }
 }

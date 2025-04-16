@@ -1,4 +1,4 @@
-package com.semenovdev.shopper.domain
+package com.semenovdev.shopperapp.domain
 
 data class ShopItem(
     val name: String,
