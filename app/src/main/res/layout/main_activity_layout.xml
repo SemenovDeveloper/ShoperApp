@@ -11,6 +11,7 @@
         android:id="@+id/rv_shop_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:paddingTop="32dp"
         android:contentDescription="@string/shop_items_list"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,12 +27,14 @@
         app:fabSize="normal"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        app:tint="@android:color/white"
+        android:backgroundTint="@color/teal_700"
         android:contentDescription="@string/button_add_shop_item"
         android:clickable="true"
         android:focusable="true"
-        android:background="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/btn_plus" />
+        app:srcCompat="@drawable/ic_add" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
