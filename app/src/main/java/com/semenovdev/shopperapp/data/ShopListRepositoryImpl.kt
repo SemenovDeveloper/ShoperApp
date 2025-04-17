@@ -13,7 +13,7 @@ object ShopListRepositoryImpl: ShopListRepository {
     private var autoIncrementId = ShopItem.UNDEFINED_ID
 
     init {
-        for (i in 0..2) {
+        for (i in 0..10) {
             var item: ShopItem = ShopItem(name = "Name ${i.toString()}", enabled = Random.nextBoolean(), count = i)
             createShopItem(item)
         }
@@ -21,7 +21,7 @@ object ShopListRepositoryImpl: ShopListRepository {
 
     override fun createShopItem(shopItem: ShopItem) {
         if (shopItem.id == ShopItem.UNDEFINED_ID) {
-            shopItem.id = autoIncrementId++
+            shopItem.id = ++autoIncrementId
         }
         shopList.add(shopItem)
         updateShopListLD()

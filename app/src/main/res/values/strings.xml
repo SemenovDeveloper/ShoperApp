@@ -7,4 +7,6 @@
     <string name="shop_items_list">Shop items list</string>
     <string name="error_shop_item_name">Incorrect name</string>
     <string name="error_shop_item_count">Incorrect count</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
