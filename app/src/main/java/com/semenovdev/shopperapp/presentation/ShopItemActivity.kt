@@ -3,11 +3,12 @@ package com.semenovdev.shopperapp.presentation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.semenovdev.shopperapp.R
 import com.semenovdev.shopperapp.domain.ShopItem
 
-class ShopItemActivity : AppCompatActivity() {
+class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishListener {
 
     private var screenMode: String = MODE_UNKNOWN
     private var shopItemID: Int = ShopItem.UNDEFINED_ID
@@ -48,6 +49,11 @@ class ShopItemActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.beginTransaction().replace(R.id.shop_item_container, fragment).commit()
+    }
+
+    override fun onEditingFinish() {
+        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+        finish()
     }
 
     companion object {

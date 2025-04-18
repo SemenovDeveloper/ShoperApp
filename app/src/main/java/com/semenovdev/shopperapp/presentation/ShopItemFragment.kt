@@ -1,5 +1,6 @@
 package com.semenovdev.shopperapp.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -29,10 +30,20 @@ class ShopItemFragment() : Fragment() {
     private var screenMode: String = arguments?.getString(MODE) ?: MODE_UNKNOWN
     private var shopItemID: Int = arguments?.getInt(SHOP_ITEM_ID) ?: ShopItem.UNDEFINED_ID
 
+    lateinit var onEditingFinishListener: OnEditingFinishListener
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("ShopItemFragment", "onCreate")
         super.onCreate(savedInstanceState)
         parseParams()
+    }
+
+    override fun onAttach(context: Context) {
+        if (context is OnEditingFinishListener){
+            onEditingFinishListener = context
+        } else {
+            throw RuntimeException("Activity should implement OnEditingFinishListener")
+        }
+        super.onAttach(context)
     }
 
     override fun onCreateView(
@@ -55,7 +66,7 @@ class ShopItemFragment() : Fragment() {
 
     private fun setViewModelObservers () {
         viewModel.isActionCompleted.observe(viewLifecycleOwner) {
-            activity?.onBackPressed()
+            onEditingFinishListener.onEditingFinish()
         }
 
         viewModel.errorInputName.observe(viewLifecycleOwner) {
@@ -163,13 +174,16 @@ class ShopItemFragment() : Fragment() {
         })
     }
 
-
     private fun initView (view: View) {
         tilName = view.findViewById<TextInputLayout>(R.id.til_name)
         tilCount = view.findViewById<TextInputLayout>(R.id.til_count)
         etName = view.findViewById<EditText>(R.id.et_name)
         etCount = view.findViewById<EditText>(R.id.et_count)
         btnSubmit = view.findViewById<Button>(R.id.button_submit)
+    }
+
+    interface OnEditingFinishListener {
+        fun onEditingFinish ()
     }
 
     companion object {
