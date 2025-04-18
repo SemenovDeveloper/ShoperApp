@@ -1,7 +1,5 @@
 package com.semenovdev.shopperapp.presentation
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -32,6 +30,7 @@ class ShopItemFragment() : Fragment() {
     private var shopItemID: Int = arguments?.getInt(SHOP_ITEM_ID) ?: ShopItem.UNDEFINED_ID
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("ShopItemFragment", "onCreate")
         super.onCreate(savedInstanceState)
         parseParams()
     }
