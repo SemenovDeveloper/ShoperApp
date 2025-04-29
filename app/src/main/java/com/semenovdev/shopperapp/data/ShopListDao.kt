@@ -2,7 +2,6 @@ package com.semenovdev.shopperapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -17,9 +16,9 @@ interface ShopListDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addShopItem(shooListItem: ShopItemDbModel)
 
-    @Query("DELETE FROM shop_items WHERE id=:shopItemId LIMIT 1")
+    @Query("DELETE FROM shop_items WHERE id=:shopItemId")
     fun deleteShopItem(shopItemId: Int)
 
-    @Query("SELECT * FROM shop_items WHERE id=:shopItemId")
+    @Query("SELECT * FROM shop_items WHERE id=:shopItemId LIMIT 1")
     fun getShopItem(shopItemId: Int): ShopItemDbModel
 }

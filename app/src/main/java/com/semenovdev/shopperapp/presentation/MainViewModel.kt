@@ -1,5 +1,7 @@
 package com.semenovdev.shopperapp.presentation
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import com.semenovdev.shopperapp.data.ShopListRepositoryImpl
 import com.semenovdev.shopperapp.domain.DeleteShopItemUseCase
@@ -8,9 +10,11 @@ import com.semenovdev.shopperapp.domain.GetShopListUseCase
 import com.semenovdev.shopperapp.domain.ShopItem
 import com.semenovdev.shopperapp.domain.UpdateShopItemUseCase
 
-class MainViewModel: ViewModel() {
+class MainViewModel(
+    application: Application
+): AndroidViewModel(application) {
 
-    private val repository = ShopListRepositoryImpl
+    private val repository = ShopListRepositoryImpl(application)
 
     private val getShopListUseCase = GetShopListUseCase(repository)
     private val deleteShopItemUseCase = DeleteShopItemUseCase(repository)

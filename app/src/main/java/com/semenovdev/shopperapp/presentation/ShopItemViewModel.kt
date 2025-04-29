@@ -1,5 +1,7 @@
 package com.semenovdev.shopperapp.presentation
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,8 +11,10 @@ import com.semenovdev.shopperapp.domain.GetShopItemUseCase
 import com.semenovdev.shopperapp.domain.ShopItem
 import com.semenovdev.shopperapp.domain.UpdateShopItemUseCase
 
-class ShopItemViewModel: ViewModel() {
-    private val repository = ShopListRepositoryImpl
+class ShopItemViewModel (
+    application: Application
+): AndroidViewModel(application) {
+    private val repository = ShopListRepositoryImpl(application)
     private val _errorInputName = MutableLiveData<Boolean>()
     val errorInputName: LiveData<Boolean>
         get() {
