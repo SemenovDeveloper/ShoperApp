@@ -6,18 +6,14 @@ import androidx.lifecycle.map
 import com.semenovdev.shopperapp.domain.ShopItem
 import com.semenovdev.shopperapp.domain.ShopListRepository
 
-class ShopListRepositoryImpl (
+class ShopListRepositoryImpl(
     application: Application
-): ShopListRepository {
+) : ShopListRepository {
 
     private val shopListDao = AppDatabase.getInstance(application).shopListDao()
     private val mapper = ShopListMapper()
 
-    override fun createShopItem(shopItem: ShopItem) {
-        shopListDao.addShopItem(mapper.mapEntityToDbModel(shopItem))
-    }
-
-    override fun updateShopItem(shopItem: ShopItem) {
+    override fun addShopItem(shopItem: ShopItem) {
         shopListDao.addShopItem(mapper.mapEntityToDbModel(shopItem))
     }
 
@@ -25,12 +21,16 @@ class ShopListRepositoryImpl (
         shopListDao.deleteShopItem(shopItem.id)
     }
 
+    override fun editShopItem(shopItem: ShopItem) {
+        shopListDao.addShopItem(mapper.mapEntityToDbModel(shopItem))
+    }
+
     override fun getShopItem(shopItemId: Int): ShopItem {
         val dbModel = shopListDao.getShopItem(shopItemId)
-        return  mapper.mapDbModelToEntity(dbModel)
+        return mapper.mapDbModelToEntity(dbModel)
     }
 
     override fun getShopList(): LiveData<List<ShopItem>> = shopListDao.getShopList().map {
-        mapper.mapDbModelListToEntitiesList(it)
+        mapper.mapListDbModelToListEntity(it)
     }
 }

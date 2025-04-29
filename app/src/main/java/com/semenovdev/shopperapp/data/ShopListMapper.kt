@@ -3,6 +3,7 @@ package com.semenovdev.shopperapp.data
 import com.semenovdev.shopperapp.domain.ShopItem
 
 class ShopListMapper {
+
     fun mapEntityToDbModel(shopItem: ShopItem) = ShopItemDbModel(
         id = shopItem.id,
         name = shopItem.name,
@@ -17,7 +18,7 @@ class ShopListMapper {
         enabled = shopItemDbModel.enabled
     )
 
-    fun mapDbModelListToEntitiesList(list: List<ShopItemDbModel>) = list.map{
+    fun mapListDbModelToListEntity(list: List<ShopItemDbModel>) = list.map {
         mapDbModelToEntity(it)
     }
 }
