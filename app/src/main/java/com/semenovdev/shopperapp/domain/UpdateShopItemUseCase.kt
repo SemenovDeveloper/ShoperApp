@@ -1,7 +1,7 @@
 package com.semenovdev.shopperapp.domain
 
 class UpdateShopItemUseCase (private val shopListRepository: ShopListRepository) {
-    fun updateShopItem (shopItem: ShopItem) {
+    suspend fun updateShopItem (shopItem: ShopItem) {
         shopListRepository.editShopItem(shopItem)
     }
 }

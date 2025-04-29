@@ -10,11 +10,16 @@ import com.semenovdev.shopperapp.domain.CreateShopItemUseCase
 import com.semenovdev.shopperapp.domain.GetShopItemUseCase
 import com.semenovdev.shopperapp.domain.ShopItem
 import com.semenovdev.shopperapp.domain.UpdateShopItemUseCase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 
 class ShopItemViewModel (
     application: Application
 ): AndroidViewModel(application) {
     private val repository = ShopListRepositoryImpl(application)
+    val scope = CoroutineScope(Dispatchers.Main)
     private val _errorInputName = MutableLiveData<Boolean>()
     val errorInputName: LiveData<Boolean>
         get() {
@@ -50,9 +55,11 @@ class ShopItemViewModel (
         val isInputsValid = validateInput(name, count)
         if (isInputsValid) {
             _shopItem.value?.let {
-                var newShopItem = it.copy(name, count)
-                updateShopItemUseCase.updateShopItem(newShopItem)
-                finishAction()
+                scope.launch {
+                    var newShopItem = it.copy(name, count)
+                    updateShopItemUseCase.updateShopItem(newShopItem)
+                    finishAction()
+                }
             }
         }
 
@@ -63,14 +70,18 @@ class ShopItemViewModel (
         val count = parseCount(inputCount)
         val isInputsValid = validateInput(name, count)
         if (isInputsValid) {
-            val shopItem = ShopItem(name, count, true)
-            createShopItemUseCase.createShopItem(shopItem)
-            finishAction()
+            scope.launch {
+                val shopItem = ShopItem(name, count, true)
+                createShopItemUseCase.createShopItem(shopItem)
+                finishAction()
+            }
         }
     }
 
     fun getShopItem(shopItemId: Int) {
-        _shopItem.value = getShopItemUseCase.getShopItemById(shopItemId)
+        scope.launch {
+            _shopItem.value = getShopItemUseCase.getShopItemById(shopItemId)
+        }
     }
 
     private fun parseName (name: String?): String {
@@ -109,5 +120,10 @@ class ShopItemViewModel (
 
     private fun finishAction () {
         _isActionCompleted.value = Unit
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        scope.cancel()
     }
 }
