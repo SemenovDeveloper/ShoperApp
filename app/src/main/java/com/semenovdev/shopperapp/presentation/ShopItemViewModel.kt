@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.semenovdev.shopperapp.data.ShopListRepositoryImpl
 import com.semenovdev.shopperapp.domain.CreateShopItemUseCase
 import com.semenovdev.shopperapp.domain.GetShopItemUseCase
@@ -19,7 +20,6 @@ class ShopItemViewModel (
     application: Application
 ): AndroidViewModel(application) {
     private val repository = ShopListRepositoryImpl(application)
-    val scope = CoroutineScope(Dispatchers.Main)
     private val _errorInputName = MutableLiveData<Boolean>()
     val errorInputName: LiveData<Boolean>
         get() {
@@ -55,7 +55,7 @@ class ShopItemViewModel (
         val isInputsValid = validateInput(name, count)
         if (isInputsValid) {
             _shopItem.value?.let {
-                scope.launch {
+                viewModelScope.launch {
                     var newShopItem = it.copy(name, count)
                     updateShopItemUseCase.updateShopItem(newShopItem)
                     finishAction()
@@ -70,7 +70,7 @@ class ShopItemViewModel (
         val count = parseCount(inputCount)
         val isInputsValid = validateInput(name, count)
         if (isInputsValid) {
-            scope.launch {
+            viewModelScope.launch {
                 val shopItem = ShopItem(name, count, true)
                 createShopItemUseCase.createShopItem(shopItem)
                 finishAction()
@@ -79,7 +79,7 @@ class ShopItemViewModel (
     }
 
     fun getShopItem(shopItemId: Int) {
-        scope.launch {
+        viewModelScope.launch {
             _shopItem.value = getShopItemUseCase.getShopItemById(shopItemId)
         }
     }
@@ -120,10 +120,5 @@ class ShopItemViewModel (
 
     private fun finishAction () {
         _isActionCompleted.value = Unit
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        scope.cancel()
     }
 }
